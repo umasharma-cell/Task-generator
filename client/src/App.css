@@ -1,0 +1,16 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.home h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.status {
+  color: #888;
+  font-size: 1rem;
+}
