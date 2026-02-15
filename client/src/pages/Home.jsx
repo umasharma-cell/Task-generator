@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import FeatureForm from '../components/FeatureForm';
 
 function Home() {
   const [serverStatus, setServerStatus] = useState('Checking...');
@@ -20,6 +21,7 @@ function Home() {
     <div className="home">
       <h1>Tasks Generator</h1>
       <p className="status">{serverStatus}</p>
+      <FeatureForm />
     </div>
   );
 }
