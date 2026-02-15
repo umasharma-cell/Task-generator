@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const PROJECT_TYPES = ['Web App', 'Mobile App', 'Internal Tool'];
 
-function FeatureForm() {
+function FeatureForm({ onGenerate, isLoading }) {
   const [formData, setFormData] = useState({
     goal: '',
     users: '',
@@ -35,12 +35,7 @@ function FeatureForm() {
       setErrors(newErrors);
       return;
     }
-    console.log({
-      goal: formData.goal,
-      users: formData.users,
-      constraints: formData.constraints,
-      projectType: formData.projectType
-    });
+    onGenerate(formData);
   };
 
   return (
@@ -54,6 +49,7 @@ function FeatureForm() {
           onChange={handleChange}
           placeholder="Describe what you want to build..."
           rows={3}
+          disabled={isLoading}
         />
         {errors.goal && <span className="error">{errors.goal}</span>}
       </div>
@@ -67,6 +63,7 @@ function FeatureForm() {
           value={formData.users}
           onChange={handleChange}
           placeholder="Who will use this feature?"
+          disabled={isLoading}
         />
         {errors.users && <span className="error">{errors.users}</span>}
       </div>
@@ -80,6 +77,7 @@ function FeatureForm() {
           onChange={handleChange}
           placeholder="Any limitations or requirements..."
           rows={3}
+          disabled={isLoading}
         />
         {errors.constraints && <span className="error">{errors.constraints}</span>}
       </div>
@@ -91,6 +89,7 @@ function FeatureForm() {
           name="projectType"
           value={formData.projectType}
           onChange={handleChange}
+          disabled={isLoading}
         >
           <option value="">Select a project type</option>
           {PROJECT_TYPES.map(type => (
@@ -100,7 +99,9 @@ function FeatureForm() {
         {errors.projectType && <span className="error">{errors.projectType}</span>}
       </div>
 
-      <button type="submit" className="submit-btn">Generate Tasks</button>
+      <button type="submit" className="submit-btn" disabled={isLoading}>
+        {isLoading ? 'Generating...' : 'Generate Tasks'}
+      </button>
     </form>
   );
 }
