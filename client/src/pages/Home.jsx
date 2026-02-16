@@ -3,6 +3,7 @@ import FeatureForm from '../components/FeatureForm';
 import TaskResults from '../components/TaskResults';
 import History from '../components/History';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
 const STORAGE_KEY = 'tasks-generator-history';
 const MAX_HISTORY = 5;
 
@@ -32,7 +33,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    fetch('/api/health')
+    fetch(`${API_URL}/api/health`)
       .then(res => res.json())
       .then(data => {
         if (data.status === 'ok') {
@@ -48,7 +49,7 @@ function Home() {
     setIsLoading(true);
     setError(null);
     try {
-      const res = await fetch('/api/generate', {
+      const res = await fetch(`${API_URL}/api/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
